@@ -1,3 +1,5 @@
+import { formatMoney } from "../utils/money";
+
 export function ProductCard({ product }) {
     return (
         <div className="product-container">
@@ -19,7 +21,7 @@ export function ProductCard({ product }) {
             </div>
 
             <div className="product-price">
-                ${(product.priceCents / 100).toFixed(2)}
+                {formatMoney(product.priceCents)}
             </div>
 
             <div className="product-quantity-container">

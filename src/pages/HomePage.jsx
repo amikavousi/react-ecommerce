@@ -5,25 +5,20 @@ import { ProductCard } from '../components/ProductCard.jsx';
 import "./HomePage.css";
 
 
-export function HomePage() {
+export function HomePage({cart}) {
 
     const [products, setProducts] = useState([]);
-    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         axios.get('/api/products').then(response => {
             setProducts(response.data);
         });
 
-        axios.get('/api/cart-items').then(response => {
-            setCartItems(response.data);
-        });
-
     }, []);
 
     return (
         <>
-            <Header cartItems={cartItems} />
+            <Header cartItems={cart} />
 
             <div className="home-page">
                 <div className="products-grid">
