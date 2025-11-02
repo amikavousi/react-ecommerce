@@ -1,13 +1,17 @@
 import dayjs from 'dayjs';
-import { formatMoney } from '../utils/money';
+import { formatMoney } from '../../utils/money';
 
 
 export function CartItem({ cartItem, deliveryOptions }) {
 
+    const selectedDeliveryDate = deliveryOptions.find((deliveryOption) => {
+        return deliveryOption.id === cartItem.deliveryOptionId
+    });
+
     return (
         <div className="cart-item-container">
             <div className="delivery-date">
-                Delivery date: Tuesday, June 21
+                Delivery date: {dayjs(selectedDeliveryDate.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
             </div>
 
             <div className="cart-item-details-grid">

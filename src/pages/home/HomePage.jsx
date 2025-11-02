@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Header } from '../components/Header.jsx';
-import { ProductCard } from '../components/ProductCard.jsx';
+import { Header } from '../../components/Header.jsx';
+import { ProductCard } from './ProductCard.jsx';
 import "./HomePage.css";
 
 
