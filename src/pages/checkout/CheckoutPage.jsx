@@ -6,20 +6,24 @@ import './checkout-header.css';
 import { formatMoney } from '../../utils/money';
 
 
-export function CheckoutPage({ cart }) {
+export function CheckoutPage({ cart, loadCart }) {
 
     const [deliveryOptions, setDeliveryOptions] = useState([]);
     const [paymentSummary, setPaymentSummary] = useState(null);
+
+    const loadPaymentSummary = async () => {
+        const response = await axios.get('/api/payment-summary');
+        setPaymentSummary(response.data);
+    };
+
 
     useEffect(() => {
         axios.get('/api/delivery-options?expand=estimatedDeliveryTime').then(response => {
             setDeliveryOptions(response.data);
         });
 
-        axios.get('/api/payment-summary').then((response) => {
-            setPaymentSummary(response.data);
-        });
-    }, []);
+        loadPaymentSummary();
+    }, [cart]);
 
     return (
         <>
@@ -48,8 +52,8 @@ export function CheckoutPage({ cart }) {
 
                 <div className="checkout-grid">
                     <div className="order-summary">
-                        {deliveryOptions.length > 0 && cart.map((cartItem) => {                            
-                            return (<CartItem  cartItem={cartItem} deliveryOptions={deliveryOptions} key={cartItem.productId} />);
+                        {deliveryOptions.length > 0 && cart.map((cartItem) => {
+                            return (<CartItem cartItem={cartItem} deliveryOptions={deliveryOptions} key={cartItem.productId} loadCart={loadCart} />);
                         })}
 
                     </div>

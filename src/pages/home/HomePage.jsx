@@ -5,7 +5,7 @@ import { ProductCard } from './ProductCard.jsx';
 import "./HomePage.css";
 
 
-export function HomePage({cart}) {
+export function HomePage({cart, loadCart}) {
 
     const [products, setProducts] = useState([]);
 
@@ -24,7 +24,7 @@ export function HomePage({cart}) {
                 <div className="products-grid">
                     {products.map((product) => {
                         return (
-                            <ProductCard key={product.id} product={product} />
+                            <ProductCard key={product.id} product={product} loadCart={loadCart} />
                         );
                     })}
                 </div>
